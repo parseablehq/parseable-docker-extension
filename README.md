@@ -7,7 +7,10 @@ With this Docker Extension, now you can spin up Parseable tool on Docker Desktop
 # Getting Started
 
 - Docker Desktop 4.8+
-- Enable Docker Extension
+- Enable Docker Extension under Dashboard UI
+
+<img width="1349" alt="image" src="https://user-images.githubusercontent.com/313480/191011291-b502e8c8-d0cd-4d87-b725-c05d19004fe8.png">
+
 
 
 ## Clone the repository
