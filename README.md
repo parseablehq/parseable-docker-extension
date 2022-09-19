@@ -13,7 +13,7 @@ With this Docker Extension, now you can spin up Parseable tool on Docker Desktop
 ## Clone the repository
 
 ```
- git clone https://github.com/parseablehq/parseable
+ git clone https://github.com/parseablehq/parseable-docker-extension
 ```
 
 ## Build the Extension
