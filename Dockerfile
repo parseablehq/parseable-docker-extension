@@ -12,4 +12,5 @@ LABEL org.opencontainers.image.title="parseable" \
 COPY docker-compose.yaml .
 COPY metadata.json .
 COPY docker.svg .
+COPY parseable.svg .
 COPY ui ui
