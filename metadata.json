@@ -1,0 +1,19 @@
+{
+  "icon": "docker.svg",
+  "vm": {
+    "composefile": "docker-compose.yaml",
+    "exposes": {
+      "socket": "extension-parseable.sock"
+    }
+  },
+  "ui": {
+    "dashboard-tab": {
+      "title": "Parseable",
+      "src": "index.html",
+      "root": "ui",
+      "backend": {
+        "socket": "extension-parseable.sock"
+      }
+    }
+  }
+}
