@@ -31,6 +31,7 @@ With this Docker Extension, now you can spin up Parseable tool on Docker Desktop
  docker extension install <name-of-extension>
 ```
 
+<img width="1348" alt="image" src="https://user-images.githubusercontent.com/313480/191011436-d3e989ef-a36d-46f3-8c25-8d7c13d13a36.png">
 
 
 
