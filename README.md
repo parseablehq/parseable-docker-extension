@@ -26,6 +26,8 @@ With this Docker Extension, now you can spin up Parseable tool on Docker Desktop
 
 ```
  docker extension install <name-of-extension>
+```
+
 
 
 
