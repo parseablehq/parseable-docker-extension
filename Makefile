@@ -1,5 +1,5 @@
-IMAGE?=collabnix/parseable
-TAG?=latest
+IMAGE?=parseable/parseable-docker-extension
+TAG?=0.0.1
 
 BUILDER=buildx-multi-arch
 
