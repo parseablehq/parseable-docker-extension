@@ -1,12 +1,10 @@
 services:
   parseable:
-    image: parseable/parseable:v0.0.1
+    image: parseable/console:latest
     ports:
-      - 8000:8000
+      - 3000:3000
     networks:
       - parseable_net
-    volumes:
-      - parseable_db:/data
 
 volumes:
   parseable_db: 
