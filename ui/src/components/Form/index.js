@@ -36,10 +36,10 @@ const Form = () => {
   return (
     <Container maxWidth="lg">
       <Box>
-        <Typography mb={2} textAlign={'center'} mt={5} variant="h6" color={"#666666"}>
+        {/* <Typography mb={2} textAlign={'center'} mt={5} variant="h6" color={"#666666"}>
           Its optional to fill and parseable will start with default config if
           fields are not filled.
-        </Typography>
+        </Typography> */}
         <Typography fontWeight="bold" variant="h6" color={"#666666"}>
           Login Credentials
         </Typography>
@@ -142,7 +142,7 @@ const Form = () => {
               Reset
             </Button>
             <Button onClick={() => saveHandler()} variant="contained">
-              Send
+              Deploy
             </Button>
           </Stack>
         </Box>

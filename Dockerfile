@@ -1,7 +1,7 @@
 FROM alpine
 LABEL org.opencontainers.image.title="parseable" \
-    org.opencontainers.image.description="Docker Extensions for Parseable" \
-    org.opencontainers.image.vendor="Parseable Inc" \
+    org.opencontainers.image.description="Docker Extension for Parseable" \
+    org.opencontainers.image.vendor="Cloudnatively Services" \
     com.docker.desktop.extension.api.version=">= 0.2.3" \
     com.docker.extension.screenshots="" \
     com.docker.extension.detailed-description="" \
