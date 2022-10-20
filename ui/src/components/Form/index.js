@@ -19,6 +19,7 @@ const Form = () => {
   const [bucketName, setBucketName] = useState("parseable");
   const [region, setRegion] = useState("us-east-1");
   const [localStorage, setLocalStorage] = useState("./data");
+  const [response, setResponse] = useState("");
 
   const resetHandler = () => {
     setUsername("parseable");
@@ -28,10 +29,13 @@ const Form = () => {
     setSecretKey("minioadmin");
     setBucketName("parseable");
     setRegion("us-east-1");
-    setLocalStorage("./data")
+    setLocalStorage("./data");
   };
 
-  const saveHandler = () => {};
+  const saveHandler = async () => {
+    const result = await ddClient.extension.vm?.service?.get("/hello");
+    setResponse(JSON.stringify(result));
+  };
 
   return (
     <Container maxWidth="lg">
@@ -127,7 +131,7 @@ const Form = () => {
           </Box>
           <Box display="flex" width="100%" flexDirection={"column"} mx={2}>
             <Typography mb={1} variant="subtitle" color={"#666666"}>
-              Local Data Storage Path
+              Local Data Storage path
             </Typography>
             <TextField
               id="outlined-basic"
@@ -135,6 +139,15 @@ const Form = () => {
               onChange={(e) => setLocalStorage(e.target.value)}
             />
           </Box>
+          <TextField
+            label="Backend response"
+            sx={{ width: 480 }}
+            disabled
+            multiline
+            variant="outlined"
+            minRows={5}
+            value={response ?? ""}
+          />
         </Box>
         <Box display="flex" width="100%" justifyContent="flex-end" mt={5}>
           <Stack direction="row" spacing={4}>
