@@ -20,6 +20,9 @@ git clone https://github.com/parseablehq/parseable-docker-extension
 ## Build the Extension
 
 ```
+cd ui
+npm run build
+cd ..
 make build-extension
 ```
 
