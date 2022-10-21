@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import { createDockerDesktopClient } from '@docker/extension-api-client';
 
 const Form = () => {
   const [username, setUsername] = useState("parseable");
@@ -19,6 +20,7 @@ const Form = () => {
   const [bucketName, setBucketName] = useState("parseable");
   const [region, setRegion] = useState("us-east-1");
   const [localStorage, setLocalStorage] = useState("./data");
+  const ddClient = createDockerDesktopClient();
 
   const resetHandler = () => {
     setUsername("parseable");
@@ -28,10 +30,12 @@ const Form = () => {
     setSecretKey("minioadmin");
     setBucketName("parseable");
     setRegion("us-east-1");
-    setLocalStorage("./data")
+    setLocalStorage("./data");
   };
 
-  const saveHandler = () => {};
+  async function runDockerParseable() {
+    const result = await ddClient.docker.cli.exec('run parseable/parseable:v0.0.5 parseable server --demo',[]);
+  }
 
   return (
     <Container maxWidth="lg">
@@ -141,7 +145,7 @@ const Form = () => {
             <Button onClick={() => resetHandler()} variant="outlined">
               Reset
             </Button>
-            <Button onClick={() => saveHandler()} variant="contained">
+            <Button onClick={() => runDockerParseable()} variant="contained">
               Deploy
             </Button>
           </Stack>

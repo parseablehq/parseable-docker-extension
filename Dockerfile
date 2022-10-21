@@ -1,3 +1,11 @@
+FROM node:14-alpine AS frontend
+COPY ui ui
+RUN cd ui && \
+    npm install --legacy-peer-deps && \
+    npm run build
+
+FROM go
+
 FROM alpine
 LABEL org.opencontainers.image.title="parseable" \
     org.opencontainers.image.description="Docker Extension for Parseable" \
@@ -9,8 +17,6 @@ LABEL org.opencontainers.image.title="parseable" \
     com.docker.extension.additional-urls="" \
     com.docker.extension.changelog=""
 
-COPY docker-compose.yaml .
 COPY metadata.json .
-COPY docker.svg .
-COPY parseable.svg .
-COPY ui ui
+COPY --from=frontend ui/build ui
+COPY images/ .

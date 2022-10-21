@@ -21,6 +21,7 @@ git clone https://github.com/parseablehq/parseable-docker-extension
 
 ```
 cd ui
+npm install
 npm run build
 cd ..
 make build-extension
