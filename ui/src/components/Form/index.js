@@ -24,6 +24,8 @@ const Form = () => {
   const [deployed, setDeployed] = useState(false);
   const [response, setResponse] = useState({});
   const [ContainerId, setContainerId] = useState("");
+  const [portNumber, setPortNumber] = useState(8000);
+  const [volumePath, setVolumePath] = useState("/temp/data");
 
   const resetHandler = () => {
     setUsername("parseable");
@@ -41,9 +43,9 @@ const Form = () => {
       "run",
       [
         "-p",
-        "8000:8000",
+        `${portNumber}:8000`,
         "-v",
-        "/tmp/data:/data",
+        `${volumePath}:/data`,
         "parseable/parseable:v0.0.5",
         "parseable",
         "server",
@@ -116,6 +118,7 @@ const Form = () => {
                 <TextField
                   id="outlined-basic"
                   value={username}
+                  sx={{ input: { color: "#A6A6A6" } }}
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </Box>
@@ -126,7 +129,38 @@ const Form = () => {
                 <TextField
                   id="outlined-basic"
                   value={password}
+                  sx={{ input: { color: "#A6A6A6" } }}
                   onChange={(e) => setPassword(e.target.value)}
+                />
+              </Box>
+            </Box>
+          </Box>
+          <Box>
+            <Typography mt={2} fontWeight="bold" variant="h6" color={"#666666"}>
+              Docker Config
+            </Typography>
+            <Box display="flex" width="100%" mt={2}>
+              <Box display="flex" width="100%" flexDirection={"column"} mx={2}>
+                <Typography mb={1} variant="subtitle" color={"#666666"}>
+                  Local Port Number
+                </Typography>
+                <TextField
+                  id="outlined-basic"
+                  value={portNumber}
+                  type="number"
+                  sx={{ input: { color: "#A6A6A6" } }}
+                  onChange={(e) => setPortNumber(e.target.value)}
+                />
+              </Box>
+              <Box display="flex" width="100%" flexDirection={"column"} mx={2}>
+                <Typography mb={1} variant="subtitle" color={"#666666"}>
+                  Local Volume Path
+                </Typography>
+                <TextField
+                  id="outlined-basic"
+                  value={volumePath}
+                  sx={{ input: { color: "#A6A6A6" } }}
+                  onChange={(e) => setVolumePath(e.target.value)}
                 />
               </Box>
             </Box>
@@ -143,6 +177,7 @@ const Form = () => {
                 <TextField
                   id="outlined-basic"
                   value={bucketUrl}
+                  sx={{ input: { color: "#A6A6A6" } }}
                   onChange={(e) => setBucketUrl(e.target.value)}
                 />
               </Box>
@@ -153,6 +188,7 @@ const Form = () => {
                 <TextField
                   id="outlined-basic"
                   value={bucketName}
+                  sx={{ input: { color: "#A6A6A6" } }}
                   onChange={(e) => setBucketName(e.target.value)}
                 />
               </Box>
@@ -165,6 +201,7 @@ const Form = () => {
                 <TextField
                   id="outlined-basic"
                   value={accessKey}
+                  sx={{ input: { color: "#A6A6A6" } }}
                   onChange={(e) => setAccessKey(e.target.value)}
                 />
               </Box>
@@ -175,6 +212,7 @@ const Form = () => {
                 <TextField
                   id="outlined-basic"
                   value={secretKey}
+                  sx={{ input: { color: "#A6A6A6" } }}
                   onChange={(e) => setSecretKey(e.target.value)}
                 />
               </Box>
@@ -187,6 +225,7 @@ const Form = () => {
                 <TextField
                   id="outlined-basic"
                   value={region}
+                  sx={{ input: { color: "#A6A6A6" } }}
                   onChange={(e) => setRegion(e.target.value)}
                 />
               </Box>
@@ -197,6 +236,7 @@ const Form = () => {
                 <TextField
                   id="outlined-basic"
                   value={localStorage}
+                  sx={{ input: { color: "#A6A6A6" } }}
                   onChange={(e) => setLocalStorage(e.target.value)}
                 />
               </Box>
