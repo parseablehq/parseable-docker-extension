@@ -13,7 +13,7 @@ const Form = () => {
   const [username, setUsername] = useState("parseable");
   const [password, setPassword] = useState("parseable");
   const [bucketUrl, setBucketUrl] = useState(
-    "https://minio.parseable.io:9000/"
+    "https://minio.parseable.io:9000"
   );
   const [accessKey, setAccessKey] = useState("minioadmin");
   const [secretKey, setSecretKey] = useState("minioadmin");
@@ -22,10 +22,9 @@ const Form = () => {
   const [localStorage, setLocalStorage] = useState("./data");
   const ddClient = createDockerDesktopClient();
   const [deployed, setDeployed] = useState(false);
-  const [response, setResponse] = useState({});
   const [ContainerId, setContainerId] = useState("");
   const [portNumber, setPortNumber] = useState(8000);
-  const [volumePath, setVolumePath] = useState("/temp/data");
+  const [volumePath, setVolumePath] = useState("/tmp/data");
 
   const resetHandler = () => {
     setUsername("parseable");
@@ -36,6 +35,8 @@ const Form = () => {
     setBucketName("parseable");
     setRegion("us-east-1");
     setLocalStorage("./data");
+    setPortNumber(8000);
+    setVolumePath("/tmp/data");
   };
 
   async function runDockerParseable() {
@@ -63,32 +64,45 @@ const Form = () => {
         region,
         "--s3-bucket-name",
         bucketName,
-      ],
-      {
-        stream: {
-          async onOutput() {
-            const containers = await ddClient.docker.listContainers();
-            console.log(
-              containers.length > 0 &&
-                containers.filter(
-                  (container) => container.Ports[0]?.PublicPort === 8000
-                )[0].Id
-            );
-            setContainerId(
-              containers.length > 0 &&
-                containers.filter(
-                  (container) => container.Ports[0]?.PublicPort === 8000
-                )[0].Id
-            );
-            setDeployed(true);
+      ]);
+    
+    const events = ddClient.docker.cli.exec(
+        "events",
+        [
+          "--format",
+          `"{{ json . }}"`,
+          "--filter",
+          "type=container",
+          "--filter",
+          "event=start",
+          "--filter",
+          "event=destroy",
+        ],
+        {
+          stream: {
+            async onOutput() {
+              const containers = await ddClient.docker.listContainers();
+              console.log(
+                containers.length > 0 &&
+                  containers.filter(
+                    (container) => container.Ports[0]?.PublicPort === 8000
+                  )[0].Id
+              );
+              setContainerId(
+                containers.length > 0 &&
+                  containers.filter(
+                    (container) => container.Ports[0]?.PublicPort === 8000
+                  )[0].Id
+              );
+              setDeployed(true);
+            },
+            onClose(exitCode) {
+              console.log("onClose with exit code " + exitCode);
+            },
+            splitOutputLines: true,
           },
-          onClose(exitCode) {
-            console.log("onClose with exit code " + exitCode);
-          },
-          splitOutputLines: true,
-        },
-      }
-    );
+        }
+      ); 
   }
 
   return (
