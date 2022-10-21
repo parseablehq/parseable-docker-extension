@@ -25,7 +25,7 @@ const Form = () => {
   const resetHandler = () => {
     setUsername("parseable");
     setPassword("parseable");
-    setBucketUrl("https://minio.parseable.io:9000/");
+    setBucketUrl("https://minio.parseable.io:9000");
     setAccessKey("minioadmin");
     setSecretKey("minioadmin");
     setBucketName("parseable");
@@ -34,7 +34,7 @@ const Form = () => {
   };
 
   async function runDockerParseable() {
-    const result = await ddClient.docker.cli.exec('run parseable/parseable:v0.0.5 parseable server --demo',[]);
+    const result = await ddClient.docker.cli.exec('run parseable/parseable:v0.0.5 parseable server --username ' +username+ ' --password ' +password+ ' --s3-endpoint-url ' + bucketUrl+' --s3-access-key-id ' +accessKey+ ' --s3-secret-key ' +secretKey+ ' --s3-region ' +region+ ' --s3-bucket-name ' +bucketName, []);
   }
 
   return (
